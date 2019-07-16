@@ -58,10 +58,10 @@ googleAnalytics = "XXX"
     url = "/"
     weight = 1
 
-#[[menu.main]]
-#    name = "Projects"
-#    url = "/project/"
-#    weight = 2
+[[menu.main]]
+    name = "Projects"
+    url = "/project/"
+    weight = 2
 
 #[[menu.main]]
 #    name = "Contact"
