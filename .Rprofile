@@ -10,3 +10,7 @@ options(
   blogdown.new_bundle = TRUE,
   blogdown.title_case = TRUE
 )
+
+if (interactive()) {
+  suppressMessages(require(blogdown))
+}
