@@ -1,0 +1,86 @@
+---
+title: 'Beyond Plot Labels: Hacking gganimate''s Frame Variables'
+author: Karl Hailperin
+date: '2019-07-16'
+slug: []
+categories: []
+tags:
+  - gganimate
+  - datavis
+description: ''
+---
+
+# An introduction to frame variables
+One of [`gganimate`'s](https://cran.r-project.org/package=gganimate) many cool
+features is frame variables, which allow you to use data about the animation 
+in your labels. For example:
+```{r setup, message=FALSE}
+library(tidyverse)
+library(cowplot)
+library(gganimate)
+```
+
+```{r basic_frame_var, warning=FALSE}
+diamond_summary <- diamonds %>% 
+  group_by(color, cut) %>% 
+  summarise(ave_price = mean(price), max_price = max(price))
+
+ggplot(diamond_summary, aes(color, ave_price)) + 
+  geom_col() +
+  theme_minimal_hgrid() +
+  transition_states(cut, transition_length = 3, state_length = 1) +
+  ggtitle("Going from {previous_state} to {next_state}")
+```
+
+We can use `"{previous_state}"` to show that last value of `cut` we stopped 
+at and `"{next_state}"` to show where we're going (Admittedly, it's a little 
+awkward when they're the same because we're not in an in-between frame). 
+
+But what if we wanted a title like "Max price for [{next_state}] is [price] with 
+color: [color]"? Thankfully, {next_state} is a string we can pass to functions: 
+
+```{r proof, warning=FALSE}
+ggplot(diamond_summary, aes(color, ave_price)) + 
+  geom_col() +
+  theme_minimal_hgrid() +
+  transition_states(cut, transition_length = 3, state_length = 1) +
+  ggtitle("next_state is a string: {is.character(next_state)}",
+          subtitle = "next_state is a factor: {is.factor(next_state)}")
+```
+
+Note: Depending on the transition, type might be preserved instead of being 
+coerced to character. Experiment to figure out how the transition you're using 
+handles the data before writing any functions.
+
+
+# Helper functions for frame variables
+So now we just need a pair of functions to find the which color has the highest
+price for a given `next_state`.
+
+```{r helper_functions}
+create_max_price_title <- function(frame_var){
+  max_price_row <- diamond_summary %>% 
+    filter(cut == frame_var) %>% 
+    group_by(cut) %>% 
+    filter(max_price == max(max_price))
+  
+  max_price <- pull(max_price_row, max_price)
+  
+  max_color <- pull(max_price_row, color)
+  
+  paste( "Max price for", frame_var,"is", max_price, "with color:", max_color)
+}
+
+```
+
+Now we're good to go.
+```{r anim_with_helper, warning=FALSE}
+ggplot(diamond_summary, aes(color, ave_price)) + 
+  geom_col() +
+  theme_minimal_hgrid() +
+  transition_states(cut, transition_length = 3, state_length = 1) +
+  ggtitle("{create_max_price_title(next_state)}")
+```
+
+# A couple of notes about `transition_reveal()` and `transition_time()`
+First, 
