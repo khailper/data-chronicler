@@ -83,4 +83,17 @@ ggplot(diamond_summary, aes(color, ave_price)) +
 ```
 
 # A couple of notes about `transition_reveal()` and `transition_time()`
-First, 
+
+First, unlike `transition_state()`, both `transition_reveal()` and 
+`transition_time()` preserve the type of their frame variables. So, if your 
+helper function relies on the fact that you are transitioning over a date-time,
+you don't have to convert it back from a character.
+
+On the other hand, the frame variables for `transition_reveal()` and 
+`transition_time()` don't necessarily correspond to an actual value in your 
+data frame in the same way `next_state` does. `gganimate` creates artifical 
+times evenly spaced across your dataset and interpolates the appropiate values
+for your other variables. The frame variables are those artifical times. So, 
+your helper function will need a step like 
+`filter(transition_col <= frame_var)` instead of 
+`filter(transition_col == frame_var)`.
