@@ -37,8 +37,8 @@ googleAnalytics = "XXX"
     email = "khailper@gmail.com"
     opengraph = true
     shareTwitter = true
-    shareFacebook = true
-    shareGooglePlus = true
+    shareFacebook = false
+    shareGooglePlus = false
     shareLinkedIn = false
     dateFormat = "Mon, Jan 2, 2006"
     highlightJsUrl = ""
@@ -58,10 +58,10 @@ googleAnalytics = "XXX"
     url = "/"
     weight = 1
 
-[[menu.main]]
-    name = "Projects"
-    url = "/project/"
-    weight = 2
+#[[menu.main]]
+#    name = "Projects"
+#    url = "/project/"
+#    weight = 2
 
 #[[menu.main]]
 #    name = "Contact"
