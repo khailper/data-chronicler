@@ -9,7 +9,8 @@ tags:
 
 I was recently working on a fun project using `gganimate` and had one of those 
 breakthroughs that made me think "This is what it feels like to steal fire from 
-the gods!"[^1]
+the gods!"[^1] I thought I would share the epiphany to share with anyone else
+who would find it helpful.
 
 # An introduction to frame variables
 One of [`gganimate`'s](https://cran.r-project.org/package=gganimate) cool
@@ -103,7 +104,7 @@ helper function, you may want to use `slice()` or additional `filter()` calls to
 get just the most "recent" data.
 
 [^1]: Minus the part where I get my liver repeatedly ripped out.
-[^2]: Admittedly, it's a little awkward when they're the same because we're not 
-in an in-between frame.
+[^2]: Admittedly, it's a little awkward when both frame variables are the same 
+because we're not in an in-between frame.
 [^3]: This is an oversimplification of `gganimate`'s internals, not helped by 
 the fact that I'm not an expert on tweening.
