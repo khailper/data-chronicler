@@ -12,13 +12,16 @@ description: ''
 
 
 
+<p>I was recently working on a fun project using <code>gganimate</code> and had one of those
+breakthroughs that made me think “This is what it feels like to steal fire from
+the gods!”<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <div id="an-introduction-to-frame-variables" class="section level1">
 <h1>An introduction to frame variables</h1>
-<p>One of <a href="https://cran.r-project.org/package=gganimate"><code>gganimate</code>’s</a> many cool
-features is frame variables, which allow you to use data about the animation
-in your labels. For example:</p>
+<p>One of <a href="https://cran.r-project.org/package=gganimate"><code>gganimate</code>’s</a> cool
+features is frame variables. They allow your labels to include data about the
+animation using <code>glue</code>-style syntax. For example:</p>
 <pre class="r"><code>library(tidyverse)
-library(cowplot)
+library(cowplot) # for theme_minimal_hgrid()
 library(gganimate)</code></pre>
 <pre class="r"><code>diamond_summary &lt;- diamonds %&gt;% 
   group_by(color, cut) %&gt;% 
@@ -30,15 +33,16 @@ ggplot(diamond_summary, aes(color, ave_price)) +
   transition_states(cut, transition_length = 3, state_length = 1) +
   ggtitle(&quot;Going from {previous_state} to {next_state}&quot;)</code></pre>
 <p><img src="/post/2019-07-16-beyond-plot-labels-hacking-gganimate-s-frame-variables/index_files/figure-html/basic_frame_var-1.gif" /><!-- --></p>
-<p>We can use <code>"{previous_state}"</code> to show that last value of <code>cut</code> we stopped
-at and <code>"{next_state}"</code> to show where we’re going (Admittedly, it’s a little
-awkward when they’re the same because we’re not in an in-between frame).</p>
+<p>We’re using the frame variable <code>"{previous_state}"</code> to show that last value of
+<code>cut</code> we stopped at and <code>"{next_state}"</code> to show where we’re going<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>.</p>
 <p>But what if we wanted a title like “Max price for [{next_state}] is [price] with
-color: [color]”? Thankfully, {next_state} is a string we can pass to functions:</p>
+color: [color]”? This is the part where we get to play Prometheus. Thankfully,
+<code>"{next_state}"</code> is a string we can pass to functions:</p>
 <pre class="r"><code>ggplot(diamond_summary, aes(color, ave_price)) + 
   geom_col() +
   theme_minimal_hgrid() +
   transition_states(cut, transition_length = 3, state_length = 1) +
+  # cut is factor in diamonds, but is being coerced into a character
   ggtitle(&quot;next_state is a string: {is.character(next_state)}&quot;,
           subtitle = &quot;next_state is a factor: {is.factor(next_state)}&quot;)</code></pre>
 <p><img src="/post/2019-07-16-beyond-plot-labels-hacking-gganimate-s-frame-variables/index_files/figure-html/proof-1.gif" /><!-- --></p>
@@ -48,8 +52,8 @@ handles the data before writing any functions.</p>
 </div>
 <div id="helper-functions-for-frame-variables" class="section level1">
 <h1>Helper functions for frame variables</h1>
-<p>So now we just need a pair of functions to find the which color has the highest
-price for a given <code>next_state</code>.</p>
+<p>So now we just need a function to find which color has the highest price for a
+given <code>next_state</code>.</p>
 <pre class="r"><code>create_max_price_title &lt;- function(frame_var){
   max_price_row &lt;- diamond_summary %&gt;% 
     filter(cut == frame_var) %&gt;% 
@@ -68,20 +72,32 @@ price for a given <code>next_state</code>.</p>
   theme_minimal_hgrid() +
   transition_states(cut, transition_length = 3, state_length = 1) +
   ggtitle(&quot;{create_max_price_title(next_state)}&quot;)</code></pre>
-<p><img src="/post/2019-07-16-beyond-plot-labels-hacking-gganimate-s-frame-variables/index_files/figure-html/anim_with_helper-1.gif" /><!-- --></p>
+<p><img src="/post/2019-07-16-beyond-plot-labels-hacking-gganimate-s-frame-variables/index_files/figure-html/anim_with_helper-1.gif" /><!-- -->
+We did it!</p>
 </div>
 <div id="a-couple-of-notes-about-transition_reveal-and-transition_time" class="section level1">
 <h1>A couple of notes about <code>transition_reveal()</code> and <code>transition_time()</code></h1>
 <p>First, unlike <code>transition_state()</code>, both <code>transition_reveal()</code> and
-<code>transition_time()</code> preserve the type of their frame variables. So, if your
-helper function relies on the fact that you are transitioning over a date-time,
-you don’t have to convert it back from a character.</p>
+<code>transition_time()</code> preserve the type of their frame variables. If your
+helper function relies on the fact that you are transitioning over a <code>Date</code>,
+for example, you don’t have to convert it back from a character.</p>
 <p>On the other hand, the frame variables for <code>transition_reveal()</code> and
-<code>transition_time()</code> don’t necessarily correspond to an actual value in your
-data frame in the same way <code>next_state</code> does. <code>gganimate</code> creates artifical
-times evenly spaced across your dataset and interpolates the appropiate values
-for your other variables. The frame variables are those artifical times. So,
-your helper function will need a step like
-<code>filter(transition_col &lt;= frame_var)</code> instead of
-<code>filter(transition_col == frame_var)</code>.</p>
+<code>transition_time()</code> often won’t correspond to an actual value in your data the
+same way <code>next_state</code> does. <code>gganimate</code> creates artificial times evenly spaced
+across your data set and interpolates the appropriate values for your other
+variables<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>. The frame variables are those artificial times. As result,
+your helper function will need to replace <code>filter(transition_col == frame_var)</code>
+with a step like <code>filter(transition_col &lt;= frame_var)</code>. Depending on the
+helper function, you may want to use <code>slice()</code> or additional <code>filter()</code> calls to
+get just the most “recent” data.</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Minus the part where I get my liver repeatedly ripped out.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>Admittedly, it’s a little awkward when they’re the same because we’re not
+in an in-between frame.<a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p>This is an oversimplification of <code>gganimate</code>’s internals, not helped by
+the fact that I’m not an expert on tweening.<a href="#fnref3" class="footnote-back">↩</a></p></li>
+</ol>
 </div>
