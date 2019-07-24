@@ -10,13 +10,17 @@ tags:
 description: ''
 ---
 
+I was recently working on a fun project using `gganimate` and had one of those 
+breakthroughs that made me think "This is what it feels like to steal fire from 
+the gods!"[^1]
+
 # An introduction to frame variables
-One of [`gganimate`'s](https://cran.r-project.org/package=gganimate) many cool
-features is frame variables, which allow you to use data about the animation 
-in your labels. For example:
+One of [`gganimate`'s](https://cran.r-project.org/package=gganimate) cool
+features is frame variables. They allow your labels to include data about the 
+animation using `glue`-style syntax. For example:
 ```{r setup, message=FALSE}
 library(tidyverse)
-library(cowplot)
+library(cowplot) # for theme_minimal_hgrid()
 library(gganimate)
 ```
 
@@ -32,18 +36,19 @@ ggplot(diamond_summary, aes(color, ave_price)) +
   ggtitle("Going from {previous_state} to {next_state}")
 ```
 
-We can use `"{previous_state}"` to show that last value of `cut` we stopped 
-at and `"{next_state}"` to show where we're going (Admittedly, it's a little 
-awkward when they're the same because we're not in an in-between frame). 
+We're using the frame variable `"{previous_state}"` to show that last value of 
+`cut` we stopped at and `"{next_state}"` to show where we're going[^2]. 
 
 But what if we wanted a title like "Max price for [{next_state}] is [price] with 
-color: [color]"? Thankfully, {next_state} is a string we can pass to functions: 
+color: [color]"? This is the part where we get to play Prometheus. Thankfully,
+`"{next_state}"` is a string we can pass to functions: 
 
 ```{r proof, warning=FALSE}
 ggplot(diamond_summary, aes(color, ave_price)) + 
   geom_col() +
   theme_minimal_hgrid() +
   transition_states(cut, transition_length = 3, state_length = 1) +
+  # cut is factor in diamonds, but is being coerced into a character
   ggtitle("next_state is a string: {is.character(next_state)}",
           subtitle = "next_state is a factor: {is.factor(next_state)}")
 ```
@@ -54,8 +59,8 @@ handles the data before writing any functions.
 
 
 # Helper functions for frame variables
-So now we just need a pair of functions to find the which color has the highest
-price for a given `next_state`.
+So now we just need a function to find which color has the highest price for a 
+given `next_state`.
 
 ```{r helper_functions}
 create_max_price_title <- function(frame_var){
@@ -81,19 +86,27 @@ ggplot(diamond_summary, aes(color, ave_price)) +
   transition_states(cut, transition_length = 3, state_length = 1) +
   ggtitle("{create_max_price_title(next_state)}")
 ```
+We did it!
 
 # A couple of notes about `transition_reveal()` and `transition_time()`
 
 First, unlike `transition_state()`, both `transition_reveal()` and 
-`transition_time()` preserve the type of their frame variables. So, if your 
-helper function relies on the fact that you are transitioning over a date-time,
-you don't have to convert it back from a character.
+`transition_time()` preserve the type of their frame variables. If your 
+helper function relies on the fact that you are transitioning over a `Date`, 
+for example, you don't have to convert it back from a character.
 
 On the other hand, the frame variables for `transition_reveal()` and 
-`transition_time()` don't necessarily correspond to an actual value in your 
-data frame in the same way `next_state` does. `gganimate` creates artifical 
-times evenly spaced across your dataset and interpolates the appropiate values
-for your other variables. The frame variables are those artifical times. So, 
-your helper function will need a step like 
-`filter(transition_col <= frame_var)` instead of 
-`filter(transition_col == frame_var)`.
+`transition_time()` often won't correspond to an actual value in your data the 
+same way `next_state` does. `gganimate` creates artificial times evenly spaced 
+across your data set and interpolates the appropriate values for your other 
+variables[^3]. The frame variables are those artificial times. As result, 
+your helper function will need to replace `filter(transition_col == frame_var)` 
+with a step like `filter(transition_col <= frame_var)`. Depending on the 
+helper function, you may want to use `slice()` or additional `filter()` calls to 
+get just the most "recent" data.
+
+[^1]: Minus the part where I get my liver repeatedly ripped out.
+[^2]: Admittedly, it's a little awkward when they're the same because we're not 
+in an in-between frame.
+[^3]: This is an oversimplification of `gganimate`'s internals, not helped by 
+the fact that I'm not an expert on tweening.
