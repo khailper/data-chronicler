@@ -9,8 +9,8 @@ tags:
 
 I was recently working on a fun project using `gganimate` and had one of those 
 breakthroughs that made me think "This is what it feels like to steal fire from 
-the gods!"[^1] I thought I would share the epiphany to share with anyone else
-who would find it helpful.
+the gods!"[^1] I thought I would share the epiphany as a blog post for anyone 
+else who would find it helpful.
 
 # An introduction to frame variables
 One of [`gganimate`'s](https://cran.r-project.org/package=gganimate) cool
