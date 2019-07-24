@@ -1,13 +1,10 @@
 ---
-title: 'Beyond Plot Labels: Hacking gganimate''s Frame Variables'
+title: 'Beyond Plot Labels: Hacking Gganimate''s Frame Variables'
 author: Karl Hailperin
-date: '2019-07-16'
-slug: []
-categories: []
+date: '2019-07-24'
 tags:
+  - dataviz
   - gganimate
-  - datavis
-description: ''
 ---
 
 
@@ -32,7 +29,7 @@ ggplot(diamond_summary, aes(color, ave_price)) +
   theme_minimal_hgrid() +
   transition_states(cut, transition_length = 3, state_length = 1) +
   ggtitle(&quot;Going from {previous_state} to {next_state}&quot;)</code></pre>
-<p><img src="/post/2019-07-16-beyond-plot-labels-hacking-gganimate-s-frame-variables/index_files/figure-html/basic_frame_var-1.gif" /><!-- --></p>
+<p><img src="/post/2019-07-24-beyond-plot-labels-hacking-gganimate-s-frame-variables/index_files/figure-html/basic_frame_var-1.gif" /><!-- --></p>
 <p>We’re using the frame variable <code>"{previous_state}"</code> to show that last value of
 <code>cut</code> we stopped at and <code>"{next_state}"</code> to show where we’re going<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>.</p>
 <p>But what if we wanted a title like “Max price for [{next_state}] is [price] with
@@ -45,7 +42,7 @@ color: [color]”? This is the part where we get to play Prometheus. Thankfully,
   # cut is factor in diamonds, but is being coerced into a character
   ggtitle(&quot;next_state is a string: {is.character(next_state)}&quot;,
           subtitle = &quot;next_state is a factor: {is.factor(next_state)}&quot;)</code></pre>
-<p><img src="/post/2019-07-16-beyond-plot-labels-hacking-gganimate-s-frame-variables/index_files/figure-html/proof-1.gif" /><!-- --></p>
+<p><img src="/post/2019-07-24-beyond-plot-labels-hacking-gganimate-s-frame-variables/index_files/figure-html/proof-1.gif" /><!-- --></p>
 <p>Note: Depending on the transition, type might be preserved instead of being
 coerced to character. Experiment to figure out how the transition you’re using
 handles the data before writing any functions.</p>
@@ -72,7 +69,7 @@ given <code>next_state</code>.</p>
   theme_minimal_hgrid() +
   transition_states(cut, transition_length = 3, state_length = 1) +
   ggtitle(&quot;{create_max_price_title(next_state)}&quot;)</code></pre>
-<p><img src="/post/2019-07-16-beyond-plot-labels-hacking-gganimate-s-frame-variables/index_files/figure-html/anim_with_helper-1.gif" /><!-- -->
+<p><img src="/post/2019-07-24-beyond-plot-labels-hacking-gganimate-s-frame-variables/index_files/figure-html/anim_with_helper-1.gif" /><!-- -->
 We did it!</p>
 </div>
 <div id="a-couple-of-notes-about-transition_reveal-and-transition_time" class="section level1">
