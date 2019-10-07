@@ -50,7 +50,18 @@ committed well before 4 o'clock. Before long, I was doing multiple commits most
 days.
 
 # Explaining why (for broad definitions of "why")
+For me, writing better commit messages has been about internalizing that the 
+clearest "why I made the commit" may not have to do with the code. I used to 
+write messages like "fixed score calculation" and "updated color palette". 
+Neither of these are ideal commit messages as they just say things that are
+probably obvious from a quick glance at the diff. The problem was I didn't have 
+anything that felt like a "proper" commit message, like "old score system lead 
+to dividing by strings". The problem wasn't the code per se, just that it 
+didn't serve the business needs.
 
+The epiphany came when I realized that "didn't serve the business needs" was a 
+perfectly good "why" all by itself, as long as I was clear what those 
+shortcomings were.
 -writing better commit messages by remembering that why doesn't have to be technical
   +if technical, be specific but short (not "fixed bug", but "found difftime issue")
 
