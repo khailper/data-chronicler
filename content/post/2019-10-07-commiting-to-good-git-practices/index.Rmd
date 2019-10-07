@@ -8,9 +8,26 @@ tags:
   - git
 description: ''
 ---
-- intro: good git instructions feel very "draw the owl". Lots of useful 
-techniques but little on how to be someone who applies them regularly enough to 
-be useful.
+One of the skills I have kept struggling the most to cultivte as a data analyst 
+is version control. Thanks to the contributions of community members like 
+[Jenny Bryan](https://happygitwithr.com/), I know how to commit, branch, merge, 
+and submit pull requestsand why these skills help my workflow. I know that I 
+should commit regularly and that commit messages should describe why I made the 
+changes instead of just saying what changed
+
+What I keep having trouble with is how to become the kind of person who does those
+things instead of being someone who commits so rarely their messages are 
+"finished Script A, wrote Script B, got a good start on Script C". Most of the 
+Git resources are more helpful at developing technical skills rather than good
+version control habits. This isn't to bash those guides; there's nothing wrong
+with having a relatively narrow goal that you do well at. 
+
+Also, habits are more personal. The things that have helped me use Git better 
+may be useless for you. That said, I wish younger me had something to use as a 
+starting point. This is my attempt to write the advice I would have found 
+helpful. Hopefully, some of you find it helpful too.
+
+
 - reference old bad git habits
 - use iphone reminder
 -writing better commit messages by remembering that why doesn't have to be technical
