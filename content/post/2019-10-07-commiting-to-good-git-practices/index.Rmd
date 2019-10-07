@@ -49,7 +49,11 @@ habit had the effect of making me more mindful of the fact that I hadn't
 committed well before 4 o'clock. Before long, I was doing multiple commits most
 days.
 
+# Explaining why (for broad definitions of "why")
+
 -writing better commit messages by remembering that why doesn't have to be technical
   +if technical, be specific but short (not "fixed bug", but "found difftime issue")
+
+# Fork if I know
 - fork as way to experiment with reports and visuals as well as SW
 - acknowledge that you're still exploring a lot of these ideas
