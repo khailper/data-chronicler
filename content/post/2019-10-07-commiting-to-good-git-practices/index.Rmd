@@ -36,8 +36,10 @@ You can't write good messages when a dozen unrelated things have changed.
 
 Fortunately, this had also been the easiest thing to change for me. I often 
 went days without committing, so I felt that even shifting to one commit per 
-day would be an improvement. I added a reminder for 4pm everything workday that
-just said "git commit."
+day would be an improvement. I added a reminder for 4pm every workday that just 
+said "git commit." 4 was late enough that I would be committing nearly all my 
+work the same day I did it but early enough that I didn't feel rushed if I had
+a lot I needed to do before leaving.
 
 - use iphone reminder
 -writing better commit messages by remembering that why doesn't have to be technical
