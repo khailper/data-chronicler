@@ -8,8 +8,12 @@ tags:
   - git
 description: ''
 ---
+- intro: good git instructions feel very "draw the owl". Lots of useful 
+techniques but little on how to be someone who applies them regularly enough to 
+be useful.
+- reference old bad git habits
 - use iphone reminder
 -writing better commit messages by remembering that why doesn't have to be technical
-  +if technical, be specific but short (not "fixed bug", but "found difftime issue"
+  +if technical, be specific but short (not "fixed bug", but "found difftime issue")
 - fork as way to experiment with reports and visuals as well as SW
-- acknowledge that you're still exploring a lot of these ideas)
+- acknowledge that you're still exploring a lot of these ideas
