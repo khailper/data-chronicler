@@ -1,0 +1,10 @@
+---
+title: Commiting to Good Git Practices
+author: Karl Hailperin
+date: '2019-10-07'
+slug: []
+categories: []
+tags:
+  - git
+description: ''
+---
