@@ -8,8 +8,8 @@ tags:
   - git
 description: ''
 ---
-One of the skills I have kept struggling the most to cultivate as a data analyst 
-is version control. Thanks to the contributions of community members like 
+One of the skills I keep struggling to cultivate as a data analyst is version 
+control. Thanks to the work of community members like 
 [Jenny Bryan](https://happygitwithr.com/), I know how to commit, branch, merge, 
 and submit pull requests and why these skills help my workflow. I know that I 
 should commit regularly and that commit messages should describe why I made the 
