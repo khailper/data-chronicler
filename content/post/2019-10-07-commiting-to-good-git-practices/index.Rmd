@@ -89,4 +89,10 @@ In hindsight, this isn't all that different from one of the main way branches
 are used in software development: testing out new features in controlled manner
 and only integrating them once you're confident they won't break anything. The 
 editing process and running visuals by third parties for feedback isn't all that
-different than making sure your new code passes unit tests. 
+different than making sure your new code passes unit tests.
+
+# Conclusion
+I still feel like I have a ways to go before I feel comfortable with my use of
+Git, but it's hard not to look back and think "Wow, I was so much worse at this
+back then" (but in a good way). I'm looking forward to the day when I look at my
+current practics with as much horror as I currently do with younger me.
