@@ -82,4 +82,11 @@ a scratch pad. They're have been times when I've experimented with a novel
 graph type or tried to look at the data from another angle, only to create 
 something that was confusing or have the data produce no new insights. Since I 
 often rewrote larges chunks of the report around these ideas, having to roll
-back all the changes has been a regular source of frustration.
+back all the changes has been a regular source of frustration. If I had put 
+those changes in a branch, a lot of hassle could have been avoided.
+
+In hindsight, this isn't all that different from one of the main way branches 
+are used in software development: testing out new features in controlled manner
+and only integrating them once you're confident they won't break anything. The 
+editing process and running visuals by third parties for feedback isn't all that
+different than making sure your new code passes unit tests. 
