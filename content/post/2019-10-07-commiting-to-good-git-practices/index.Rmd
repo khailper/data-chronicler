@@ -72,5 +72,11 @@ what a good commit message for a blog post looks like.
 
 # Going out on a limb
 Even more so than commit messages, my experience with using branches is limited.
+This is mostly me theorizing what would be a good way to uses branches more 
+effectively. If you have experience in an analytics context (data viz, reports, 
+etc.), please feel free to [let me know](https://twitter.com/khailper). I'd 
+love to share other people's solutions to this problem.
+
+
 - branch as way to experiment with reports and visuals as well as SW
 - acknowledge that you're still exploring a lot of these ideas
