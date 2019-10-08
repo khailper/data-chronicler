@@ -77,6 +77,9 @@ effectively. If you have experience in an analytics context (data viz, reports,
 etc.), please feel free to [let me know](https://twitter.com/khailper). I'd 
 love to share other people's solutions to this problem.
 
-
-- branch as way to experiment with reports and visuals as well as SW
-- acknowledge that you're still exploring a lot of these ideas
+Looking back at some of my work, I think I should have treated branches like 
+a scratch pad. They're have been times when I've experimented with a novel 
+graph type or tried to look at the data from another angle, only to create 
+something that was confusing or have the data produce no new insights. Since I 
+often rewrote larges chunks of the report around these ideas, having to roll
+back all the changes has been a regular source of frustration.
