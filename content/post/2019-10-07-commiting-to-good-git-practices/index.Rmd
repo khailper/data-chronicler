@@ -70,6 +70,7 @@ still periodically write messages that are too focused on the what or vague as
 to the why, and I've got a while to go before I feel like I have a good sense of
 what a good commit message for a blog post looks like.
 
-# Fork if I know
-- fork as way to experiment with reports and visuals as well as SW
+# Going out on a limb
+Even more so than commit messages, my experience with using branches is limited.
+- branch as way to experiment with reports and visuals as well as SW
 - acknowledge that you're still exploring a lot of these ideas
