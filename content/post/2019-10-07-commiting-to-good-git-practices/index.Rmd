@@ -15,12 +15,12 @@ and submit pull requests and why these skills are useful. I know that I
 should commit regularly and that commit messages should describe why I made the 
 changes instead of what changed.
 
-What I keep having trouble with is how to become the kind of person who does those
-things instead of being someone who commits so rarely their messages are 
+What I keep having trouble with is how to be the kind of person who does those
+things instead of someone who commits so rarely their messages are 
 "finished Script A, wrote Script B, got a good start on Script C". Most of the 
-Git resources are more helpful at developing technical skills rather than good
-version control habits. This isn't to bash those guides; there's nothing wrong
-with having a relatively narrow goal that you do well. 
+Git resources are more helpful at developing technical skills instead of good 
+habits. This isn't to bash those guides; it's often good to have a 
+relatively narrow goal that you do well. 
 
 Also, habits are more personal. The things that have helped me use Git better 
 may be useless for you. That said, I wish younger me had something to use as a 
