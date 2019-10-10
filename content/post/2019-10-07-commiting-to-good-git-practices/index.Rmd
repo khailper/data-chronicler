@@ -22,7 +22,7 @@ Git resources are more helpful at developing technical skills instead of good
 habits. This isn't to bash those guides; it's often good to have a 
 relatively narrow goal that you do well. 
 
-Also, habits are more personal. The things that have helped me use Git better 
+Also, habits are more personal. The tools that have helped me use Git better 
 may be useless for you. That said, I wish younger me had something to use as a 
 starting point. This is my attempt to write the advice I would have found 
 helpful. Hopefully, some of you find it helpful too.
