@@ -34,12 +34,12 @@ enough. When going back one commit leads to lots of unwanted changes, you feel
 better off just hitting Ctrl-Z a bunch. You can't write good messages when a 
 dozen unrelated things have changed.
 
-Fortunately, this had also been the easiest thing to change for me. I often 
-went days without committing, so I felt that even shifting to one commit per 
+Fortunately, this has also been the easiest thing to change for me. I often 
+went days without committing, so I felt that even shifting to one commit a 
 day would be an improvement. I added a reminder for 4pm every workday that just 
-said "git commit." 4 was late enough that I would be committing nearly all my 
-work the same day I did it but early enough that I didn't feel rushed if I had
-a lot I needed to do before leaving.
+said "git commit". That was late enough that I would be committing nearly all my 
+code the same day it was written. At the same time, it was early enough that I 
+didn't feel rushed if I had a lot I needed to do before leaving.
 
 My plan was to stick to one commit a day until I felt like had built the habit, 
 then add a second reminder earlier in the day. Eventually, I'd have enough 
