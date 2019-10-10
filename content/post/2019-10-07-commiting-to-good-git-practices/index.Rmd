@@ -43,11 +43,10 @@ didn't feel rushed if I had a lot I needed to do before leaving.
 
 My plan was to stick to one commit a day until I felt like had built the habit, 
 then add a second reminder earlier in the day. Eventually, I'd have enough 
-reminders that my commits would usually be a reasonable size. Fortunately, it 
+reminders that my commits would usually be a reasonable size. Fortunately, I 
 didn't need to have my phone beep at me five times a day. Making commits a daily
-habit had the effect of making me more mindful of the fact that I hadn't 
-committed well before 4 o'clock. Before long, I was doing multiple commits most
-days.
+habit made me more mindful of the fact that I hadn't done a commit even when it 
+was nowhere near 4 o'clock. Before long, I was doing multiple commits most days.
 
 # Explaining why (for broad definitions of "why")
 For me, writing better commit messages has been about internalizing that the 
