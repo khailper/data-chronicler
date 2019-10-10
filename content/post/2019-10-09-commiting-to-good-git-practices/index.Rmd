@@ -1,12 +1,9 @@
 ---
 title: Commiting to Good Git Practices
 author: Karl Hailperin
-date: '2019-10-07'
-slug: []
-categories: []
+date: '2019-10-09'
 tags:
   - git
-description: ''
 ---
 One of the skills I keep struggling to cultivate as a data analyst is version 
 control. Thanks to the work of community members like 
