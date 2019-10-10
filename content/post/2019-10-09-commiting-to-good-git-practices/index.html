@@ -1,0 +1,90 @@
+---
+title: Commiting to Good Git Practices
+author: Karl Hailperin
+date: '2019-10-09'
+tags:
+  - git
+---
+
+
+
+<p>One of the skills I keep struggling to cultivate as a data analyst is version
+control. Thanks to the work of community members like
+<a href="https://happygitwithr.com/">Jenny Bryan</a>, I know how to commit, branch, merge,
+and submit pull requests and why these skills are useful. I know that I
+should commit regularly and that commit messages should describe why I made the
+changes instead of what changed.</p>
+<p>What I keep having trouble with is how to be the kind of person who does those
+things instead of someone who commits so rarely their messages are
+“finished Script A, wrote Script B, got a good start on Script C”. Most of the
+Git resources are more helpful at developing technical skills instead of good
+habits. This isn’t to bash those guides; it’s often good to have a
+relatively narrow goal that you do well.</p>
+<p>Also, habits are more personal. The tools that have helped me use Git better
+may be useless for you. That said, I wish younger me had something to use as a
+starting point. This is my attempt to write the advice I would have found
+helpful. Hopefully, some of you find it helpful too.</p>
+<div id="the-key-to-committing-more-often-is-to-commit-more-often" class="section level1">
+<h1>The key to committing more often is to commit more often</h1>
+<p>The first problem I needed to address was that I just wasn’t committing often
+enough. When going back one commit leads to lots of unwanted changes, you feel
+better off just hitting Ctrl-Z a bunch. You can’t write good messages when a
+dozen unrelated things have changed.</p>
+<p>Fortunately, this has also been the easiest thing to change for me. I often
+went days without committing, so I felt that even shifting to one commit a
+day would be an improvement. I added a reminder for 4pm every workday that just
+said “git commit”. That was late enough that I would be committing nearly all my
+code the same day it was written. At the same time, it was early enough that I
+didn’t feel rushed if I had a lot I needed to do before leaving.</p>
+<p>My plan was to stick to one commit a day until I felt like had built the habit,
+then add a second reminder earlier in the day. Eventually, I’d have enough
+reminders that my commits would usually be a reasonable size. Fortunately, I
+didn’t need to have my phone beep at me five times a day. Making commits a daily
+habit made me more mindful of the fact that I hadn’t done a commit even when it
+was nowhere near 4 o’clock. Before long, I was doing multiple commits most days.</p>
+</div>
+<div id="explaining-why-for-broad-definitions-of-why" class="section level1">
+<h1>Explaining why (for broad definitions of “why”)</h1>
+<p>I used to write messages like “fixed score calculation” and “updated color
+palette”. Neither of these are ideal commit messages as they just say things
+that are probably obvious from a quick glance at the diff. The problem was I
+didn’t have anything that felt like a “proper” commit message, like “old score
+system lead to dividing by strings”. The problem wasn’t the code per se, just
+that it didn’t serve the business needs.</p>
+<p>The epiphany came when I realized that “didn’t serve the business needs” was a
+perfectly good “why” all by itself, as long as I was clear what those
+shortcomings were. Now I’m often writing commit messages like “SME pointed out
+error in the score calculation” and “old color palette was garish”.</p>
+<p>Admittedly, this is very much a work in progress. While I know how to write
+better commit messages, I still haven’t fully internalized that idea. I
+still periodically write messages that are too focused on the what or vague as
+to the why. In addition, I’ve got a while to go before I feel like I have a good
+sense of what a commit message for a blog post should look like.</p>
+</div>
+<div id="going-out-on-a-limb" class="section level1">
+<h1>Going out on a limb</h1>
+<p>Even more so than commit messages, my experience with using branches is limited.
+This is mostly me theorizing about what would be a good way to uses branches
+more effectively. If you have experience in an analytics context (data viz,
+reports, etc.), please feel free to <a href="https://twitter.com/khailper">let me know</a>.
+I’d love to share other people’s solutions to this problem.</p>
+<p>Looking back at some of my work, I think I should have treated branches like
+a scratch pad. There have been times when I’ve experimented with a novel
+graph type or tried to look at the data from another angle, only to create
+something that was confusing or produced no new insights. Since I often rewrote
+larges chunks of the report around these ideas, having to roll back all the
+changes was a regular source of frustration. If I had put those changes in a
+branch, a lot of hassle could have been avoided.</p>
+<p>In hindsight, this isn’t all that different from one of the main way branches
+are used in software development: testing out new features in controlled manner
+and only integrating them once you’re confident they won’t break anything. The
+editing process and running visuals by third parties for feedback isn’t all that
+different than making sure your new code passes unit tests.</p>
+</div>
+<div id="conclusion" class="section level1">
+<h1>Conclusion</h1>
+<p>I still feel like I have a ways to go before I feel comfortable like an expert
+in Git, but it’s hard not to look back and think “Wow, I was so much worse at
+this back then” (but in a good way). I’m looking forward to the day when I look
+at my current practices with as much horror as I currently do with younger me.</p>
+</div>
