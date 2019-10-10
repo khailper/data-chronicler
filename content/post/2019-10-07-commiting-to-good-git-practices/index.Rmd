@@ -13,7 +13,7 @@ control. Thanks to the work of community members like
 [Jenny Bryan](https://happygitwithr.com/), I know how to commit, branch, merge, 
 and submit pull requests and why these skills are useful. I know that I 
 should commit regularly and that commit messages should describe why I made the 
-changes instead of just saying what changed.
+changes instead of what changed.
 
 What I keep having trouble with is how to become the kind of person who does those
 things instead of being someone who commits so rarely their messages are 
