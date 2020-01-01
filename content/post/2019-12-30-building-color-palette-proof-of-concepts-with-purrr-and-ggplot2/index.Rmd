@@ -1,5 +1,5 @@
 ---
-title: Building Color Palette Proof of Concepts with Purrr and ggplot2
+title: Building Color Palette Proof of Concepts with purrr and ggplot2
 author: Karl Hailperin
 date: '2019-12-30'
 slug: []
@@ -8,3 +8,12 @@ tags:
   - dataviz
 description: ''
 ---
+Recently, I raised the idea at work of changing the color palettes we use for 
+our dashboards. I felt the default ones we using suffered from not being 
+accessible to clients with coor blindness and could also benifit from being more
+distinctive. My boss was open to the idea, but (understandably) wanted me to put 
+together mockups of possible new palettes before we starting tinkering with our
+product. Fortunately the tidyverse makes it fast to generate proof of concepts 
+for several palettes.
+
+# Dummy data
