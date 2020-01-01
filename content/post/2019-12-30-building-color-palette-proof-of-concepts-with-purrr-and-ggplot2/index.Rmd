@@ -10,10 +10,13 @@ description: ''
 ---
 Recently, I raised the idea at work of changing the color palettes we use for 
 our dashboards. I felt the default ones we using suffered from not being 
-accessible to clients with coor blindness and could also benifit from being more
+accessible to clients with color blindness and could also benefit from being more
 distinctive. My boss was open to the idea, but (understandably) wanted me to put 
 together mockups of possible new palettes before we starting tinkering with our
 product. Fortunately the tidyverse makes it fast to generate proof of concepts 
 for several palettes.
 
-# Dummy data
+# Baseline plots
+We want plots we can use to show off how different color palettes handle 
+continuous and discrete data. A bar chart and a scatter plot seem like 
+good ways to do that.
