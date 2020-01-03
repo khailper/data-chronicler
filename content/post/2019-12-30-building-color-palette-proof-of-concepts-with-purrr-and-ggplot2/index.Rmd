@@ -29,24 +29,30 @@ theme_set(theme_minimal())
 ```
 
 ```{r bar_chart}
-bar_chart <- ggplot(msleep, aes(conservation, fill = conservation)) + 
+bar_chart <- ggplot(diamonds, aes(cut, fill = cut)) + 
   geom_bar() + 
+  coord_flip() +
   # fill guide would just duplicate x-axis label and take up space
-  guides(fill = FALSE)
+  guides(fill = FALSE) +
+  labs(x = "Cut", y = "# of diamonds")
 
 bar_chart
 ```
 
 ```{r scatter_plot}
 scatter_plot <- ggplot(txhousing, aes(listings, sales, color = median)) +
-  geom_point()
+  geom_point() +
+  labs(x = "Monthly listings in county", 
+       y = "# of sales",
+       color = "Median sale price")
 
 scatter_plot
 ```
 
 ```{r patchwork}
-patch <- bar_chart + scatter_plot
+patch <- bar_chart / scatter_plot
 
 patch
 ```
 
+# Palettes
