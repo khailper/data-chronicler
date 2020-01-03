@@ -20,3 +20,33 @@ for several palettes.
 We want plots we can use to show off how different color palettes handle 
 continuous and discrete data. A bar chart and a scatter plot seem like 
 good ways to do that.
+
+```{r setup, echo = FALSE}
+library(tidyverse)
+library(patchwork) # to put both plots in the same image
+
+theme_set(theme_minimal())
+```
+
+```{r bar_chart}
+bar_chart <- ggplot(msleep, aes(conservation, fill = conservation)) + 
+  geom_bar() + 
+  # fill guide would just duplicate x-axis label and take up space
+  guides(fill = FALSE)
+
+bar_chart
+```
+
+```{r scatter_plot}
+scatter_plot <- ggplot(txhousing, aes(listings, sales, color = median)) +
+  geom_point()
+
+scatter_plot
+```
+
+```{r patchwork}
+patch <- bar_chart + scatter_plot
+
+patch
+```
+
