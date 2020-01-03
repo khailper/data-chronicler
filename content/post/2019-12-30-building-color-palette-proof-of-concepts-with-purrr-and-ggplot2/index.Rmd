@@ -56,3 +56,21 @@ patch
 ```
 
 # Palettes
+We're going to use a few palettes from
+[`viridis`](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html) 
+(now part of `ggplot2`) and 
+[`scico`](https://www.data-imaginist.com/2018/scico-and-the-colour-conundrum/). 
+Both packages prioritize palettes that are friendly to users with 
+colorblindness and read well.Since this is for presenting to a higher-up, I've 
+already narrowed itdown to two or three palettes from each package that I 
+think might be appealing and are different from each other and are fairly 
+different from each other.
+
+```{r viridis_palettes}
+
+```
+
+```{r scico_palettes}
+
+```
+
