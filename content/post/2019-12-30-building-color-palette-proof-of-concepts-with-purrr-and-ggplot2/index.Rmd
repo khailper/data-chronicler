@@ -63,7 +63,7 @@ think might be appealing and are fairly different from each other.
 ```{r palettes}
 viridis_palettes <- list(c("C", "plasma"), c("D", "viridis"))
 
-scico_palettes <- c("buda", "davos", "lapaz")
+scico_palettes <- c("davos", "lajolla", "lapaz")
 ```
 
 We're using a list of vectors for `viridis`_pals` but not for `scico_pals` 
@@ -72,6 +72,7 @@ want to keep the name so that it can be used in plot titles and file names.
 `scico` just uses the name of the palette, so a vector of palette names is 
 enough.
 
+# Creating the Proofs of Concept
 
 ```{r build_vir_poc}
 build_vir_poc <- function(vir_pal){
