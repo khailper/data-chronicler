@@ -63,7 +63,7 @@ think might be appealing and are fairly different from each other.
 ```{r palettes}
 viridis_palettes <- list(c("C", "plasma"), c("D", "viridis"))
 
-scico_palettes <- c("davos", "lajolla", "lapaz")
+scico_palettes <- c("devon", "lajolla", "lapaz")
 ```
 
 We're using a list of vectors for `viridis`_pals` but not for `scico_pals` 
