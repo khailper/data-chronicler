@@ -49,12 +49,6 @@ scatter_plot <- ggplot(txhousing, aes(listings, sales, color = median)) +
 scatter_plot
 ```
 
-```{r patchwork}
-patch <- bar_chart / scatter_plot
-
-patch
-```
-
 # Palettes
 We're going to use a few palettes from
 [`viridis`](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html) 
@@ -63,14 +57,55 @@ We're going to use a few palettes from
 Both packages prioritize palettes that are friendly to users with 
 colorblindness and read well.Since this is for presenting to a higher-up, I've 
 already narrowed itdown to two or three palettes from each package that I 
-think might be appealing and are different from each other and are fairly 
+think might be appealing and are fairly 
 different from each other.
 
-```{r viridis_palettes}
+```{r palettes}
+viridis_palettes <- list(c("c", "plasma"), c("D", "viridis"))
 
+scico_palettes <- c("buda", "davos", "lapaz")
 ```
 
-```{r scico_palettes}
+We're using a list of vectors for `viridis`_pals` but not for `scico_pals` because
 
+
+```{r build_vir_poc}
+builid_vir_poc <- function(vir_pal){
+
+vir_bar <- bar_chart + scale_fill_viridis_d(option = virid_pal[1])
+
+vir_scatter <- scatter_plot + scale_color_viridis(option = virid_pal[1])
+vir_patch <-  vir_bar/ vir_scatter + 
+  plot_annotation(title = vir_pal[2])
+
+vir_patch
+
+#uncomment to include saving the files as part of the workflow
+# ggsave(filename = here::here(paste0("figs/", vir_pal[2], ".jpg")),
+#        plot = vir_patch)
+}
+```
+
+```{r build_scico_poc}
+builid_scico_poc <- function(scico_pal){
+
+scico_bar <- bar_chart + scale_fill_scicos(palette = scico_pal)
+
+scico_scatter <- scatter_plot + scale_color_scico(palette = scico_pal)
+scico_patch <-  scico_bar/ scico_scatter + 
+  plot_annotation(title = scico_pal)
+
+scico_patch 
+
+#uncomment to include saving the files as part of the workflow
+# ggsave(filename = here::here(paste0("figs/", scico_pal, ".jpg")),
+#        plot = scico_patch)
+}
+```
+
+
+```{r create_plots}
+walk(viridis_palettes, build_vir_poc)
+walk(scico_palettes, build_scico_poc)
 ```
 
