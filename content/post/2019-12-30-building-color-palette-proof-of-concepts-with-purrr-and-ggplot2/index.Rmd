@@ -23,6 +23,7 @@ good ways to do that.
 
 ```{r setup, echo = FALSE}
 library(tidyverse)
+library(scico)
 library(patchwork) # to put both plots in the same image
 
 theme_set(theme_minimal())
@@ -57,53 +58,61 @@ We're going to use a few palettes from
 Both packages prioritize palettes that are friendly to users with 
 colorblindness and read well.Since this is for presenting to a higher-up, I've 
 already narrowed itdown to two or three palettes from each package that I 
-think might be appealing and are fairly 
-different from each other.
+think might be appealing and are fairly different from each other.
 
 ```{r palettes}
-viridis_palettes <- list(c("c", "plasma"), c("D", "viridis"))
+viridis_palettes <- list(c("C", "plasma"), c("D", "viridis"))
 
 scico_palettes <- c("buda", "davos", "lapaz")
 ```
 
-We're using a list of vectors for `viridis`_pals` but not for `scico_pals` because
+We're using a list of vectors for `viridis`_pals` but not for `scico_pals` 
+because `ggplot2` using letter codes to identify viridis palettes. However, we 
+want to keep the name so that it can be used in plot titles and file names.
+`scico` just uses the name of the palette, so a vector of palette names is 
+enough.
 
 
 ```{r build_vir_poc}
-builid_vir_poc <- function(vir_pal){
+build_vir_poc <- function(vir_pal){
 
-vir_bar <- bar_chart + scale_fill_viridis_d(option = virid_pal[1])
+vir_bar <- bar_chart + scale_fill_viridis_d(option = vir_pal[1])
 
-vir_scatter <- scatter_plot + scale_color_viridis(option = virid_pal[1])
+vir_scatter <- scatter_plot + scale_color_viridis_c(option = vir_pal[1])
 vir_patch <-  vir_bar/ vir_scatter + 
   plot_annotation(title = vir_pal[2])
 
-vir_patch
+print(vir_patch)
 
-#uncomment to include saving the files as part of the workflow
+# uncomment to include saving the files as part of the workflow
 # ggsave(filename = here::here(paste0("figs/", vir_pal[2], ".jpg")),
 #        plot = vir_patch)
 }
 ```
 
 ```{r build_scico_poc}
-builid_scico_poc <- function(scico_pal){
+build_scico_poc <- function(scico_pal){
 
-scico_bar <- bar_chart + scale_fill_scicos(palette = scico_pal)
+scico_bar <- bar_chart + scale_fill_scico_d(palette = scico_pal)
 
 scico_scatter <- scatter_plot + scale_color_scico(palette = scico_pal)
 scico_patch <-  scico_bar/ scico_scatter + 
   plot_annotation(title = scico_pal)
 
-scico_patch 
+print(scico_patch)
 
-#uncomment to include saving the files as part of the workflow
+# uncomment to include saving the files as part of the workflow
 # ggsave(filename = here::here(paste0("figs/", scico_pal, ".jpg")),
 #        plot = scico_patch)
 }
 ```
 
-
+To generate all those plots, we need to iterate the functions over our palettes.
+We could do this with a for loop, but we can simplify things with 
+`purrr::walk()`. `walk` is  version of
+(`purrr::map()`)[https://jennybc.github.io/purrr-tutorial/ls01_map-name-position-shortcuts.html] that is designed for functions where we care about the side effects (e.g. 
+creating a plot, writing to a file) instead of a traditional return value (e.g. 
+the square root of an input).
 ```{r create_plots}
 walk(viridis_palettes, build_vir_poc)
 walk(scico_palettes, build_scico_poc)
