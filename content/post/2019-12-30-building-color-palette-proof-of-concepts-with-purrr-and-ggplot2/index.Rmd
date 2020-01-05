@@ -73,13 +73,20 @@ want to keep the name so that it can be used in plot titles and file names.
 enough.
 
 # Creating the Proofs of Concept
-
+Since we're repeating the same core process (building a pair of plots) with 
+minor tweaks (using a different color palette), we should write a function
+rather that we can re-run with a new parameter for each palette. Adding a 
+palette from `viridis` is different enough from adding one from `scico` that 
+we'll actually want two, one for each.
 ```{r build_vir_poc}
 build_vir_poc <- function(vir_pal){
 
+# use the letter code part of the vector for the scale function
 vir_bar <- bar_chart + scale_fill_viridis_d(option = vir_pal[1])
 
 vir_scatter <- scatter_plot + scale_color_viridis_c(option = vir_pal[1])
+
+# use the name part for the title
 vir_patch <-  vir_bar/ vir_scatter + 
   plot_annotation(title = vir_pal[2])
 
@@ -108,6 +115,7 @@ print(scico_patch)
 }
 ```
 
+# Scale up with `purrr::walk()`
 To generate all those plots, we need to iterate the functions over our palettes.
 We could do this with a for loop, but we can simplify things with 
 `purrr::walk()`. `walk` is  version of
@@ -119,3 +127,4 @@ walk(viridis_palettes, build_vir_poc)
 walk(scico_palettes, build_scico_poc)
 ```
 
+# Conclusion
