@@ -61,12 +61,13 @@ already narrowed itdown to two or three palettes from each package that I
 think might be appealing and are fairly different from each other.
 
 ```{r palettes}
-viridis_palettes <- list(c("C", "plasma"), c("D", "viridis"))
+viridis_palettes <- c("plasma", "viridis")
+viridis_pal_codes <- c("C", "D")
 
 scico_palettes <- c("devon", "lajolla", "lapaz")
 ```
 
-We're using a list of vectors for `viridis`_pals` but not for `scico_pals` 
+We're using a pair of vectors for `viridis`_pals` but not for `scico_pals` 
 because `ggplot2` using letter codes to identify viridis palettes. However, we 
 want to keep the name so that it can be used in plot titles and file names.
 `scico` just uses the name of the palette, so a vector of palette names is 
@@ -86,22 +87,22 @@ name of the palette as a title.
 that you're using a [project-oriented workflow](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/) to 
 managing your plot files.
 ```{r build_vir_poc}
-build_vir_poc <- function(vir_pal){
+build_vir_poc <- function(vir_pal_name, vir_pal_code){
 
 # use the letter code part of the vector for the scale function
-vir_bar <- bar_chart + scale_fill_viridis_d(option = vir_pal[1], 
+vir_bar <- bar_chart + scale_fill_viridis_d(option = vir_pal_code, 
                                             save_plot = FALSE)
 
-vir_scatter <- scatter_plot + scale_color_viridis_c(option = vir_pal[1])
+vir_scatter <- scatter_plot + scale_color_viridis_c(option = vir_pal_code)
 
 # use the name part for the title
 vir_patch <-  vir_bar/ vir_scatter + 
-  plot_annotation(title = vir_pal[2])
+  plot_annotation(title = vir_pal_name)
 
 print(vir_patch)
 
 if (save_plot = TRUE){
-  ggsave(filename = here::here(paste0("figs/", vir_pal[2], ".jpg")),
+  ggsave(filename = here::here(paste0("figs/", vir_pal_name, ".jpg")),
        plot = vir_patch)
 }
 }
@@ -133,10 +134,15 @@ We could do this with a for loop, but we can simplify things with
 `purrr::walk()`. `walk` is  version of
 (`purrr::map()`)[https://jennybc.github.io/purrr-tutorial/ls01_map-name-position-shortcuts.html] that is designed for functions where we care about the side effects (e.g. 
 creating a plot, writing to a file) instead of a traditional return value (e.g. 
-the square root of an input).
+the square root of an input). For `build_vir_poc`, we use a varient of `walk()`: 
+`walk2()`. `walk2` lets you iterate over a pair of vectors for when you have two 
+parameters that you wnat to change.
 ```{r create_plots}
-walk(viridis_palettes, build_vir_poc)
+walk2(viridis_palettes, viridis_pal_codes, build_vir_poc)
 walk(scico_palettes, build_scico_poc)
 ```
 
 # Conclusion
+While I like the `devon`, the fact it leads to a white bar on a white background
+is a dealbreaker. I'd want to cut it even before presenting my findings. 
+Otherwise, this is a good starting point for 
