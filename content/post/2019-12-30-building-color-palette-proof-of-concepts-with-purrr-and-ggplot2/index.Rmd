@@ -40,7 +40,7 @@ bar_chart <- ggplot(diamonds, aes(cut, fill = cut)) +
 bar_chart
 ```
 
-```{r scatter_plot}
+```{r scatter_plot, warning = FALSE}
 scatter_plot <- ggplot(txhousing, aes(listings, sales, color = median)) +
   geom_point() +
   labs(x = "Monthly listings in county", 
@@ -137,12 +137,13 @@ creating a plot, writing to a file) instead of a traditional return value (e.g.
 the square root of an input). For `build_vir_poc`, we use a varient of `walk()`: 
 `walk2()`. `walk2` lets you iterate over a pair of vectors for when you have two 
 parameters that you wnat to change.
-```{r create_plots}
+```{r create_plots, warning = FALSE}
 walk2(viridis_palettes, viridis_pal_codes, build_vir_poc)
 walk(scico_palettes, build_scico_poc)
 ```
 
 # Conclusion
-While I like the `devon`, the fact it leads to a white bar on a white background
+While I like the `devon` colors, the fact it leads to a white bar on a white background
 is a dealbreaker. I'd want to cut it even before presenting my findings. 
-Otherwise, this is a good starting point for 
+Otherwise, this is a good starting point for a discussion about alternatives to 
+default color schemes.
