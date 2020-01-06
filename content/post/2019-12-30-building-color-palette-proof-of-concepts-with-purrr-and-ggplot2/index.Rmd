@@ -9,11 +9,11 @@ tags:
 description: ''
 ---
 Recently, I raised the idea at work of changing the color palettes we use for 
-our dashboards. I felt the default ones we using suffered from not being 
-accessible to clients with color blindness and could also benefit from being more
+our dashboards. I felt the default colors we were using suffered from not being 
+accessible to clients with color blindness and could benefit from being more
 distinctive. My boss was open to the idea, but (understandably) wanted me to put 
 together mockups of possible new palettes before we starting tinkering with our
-product. Fortunately the tidyverse makes it fast to generate proof of concepts 
+product. Fortunately, the tidyverse makes it fast to generate proof of concepts 
 for several palettes.
 
 # Baseline plots
@@ -57,7 +57,7 @@ We're going to use a few palettes from
 [`scico`](https://www.data-imaginist.com/2018/scico-and-the-colour-conundrum/). 
 Both packages prioritize palettes that are friendly to users with 
 colorblindness and read well.Since this is for presenting to a higher-up, I've 
-already narrowed itdown to two or three palettes from each package that I 
+already narrowed it down to two or three palettes from each package that I 
 think might be appealing and are fairly different from each other.
 
 ```{r palettes}
@@ -134,9 +134,9 @@ We could do this with a for loop, but we can simplify things with
 `purrr::walk()`. `walk` is  version of
 (`purrr::map()`)[https://jennybc.github.io/purrr-tutorial/ls01_map-name-position-shortcuts.html] that is designed for functions where we care about the side effects (e.g. 
 creating a plot, writing to a file) instead of a traditional return value (e.g. 
-the square root of an input). For `build_vir_poc`, we use a varient of `walk()`: 
+the square root of an input). For `build_vir_poc`, we use a variant of `walk()`: 
 `walk2()`. `walk2` lets you iterate over a pair of vectors for when you have two 
-parameters that you wnat to change.
+parameters that you want to change.
 ```{r create_plots, warning = FALSE}
 walk2(viridis_palettes, viridis_pal_codes, build_vir_poc)
 walk(scico_palettes, build_scico_poc)
@@ -144,9 +144,9 @@ walk(scico_palettes, build_scico_poc)
 
 # Conclusion
 While I like the `devon` colors, the fact it leads to a white bar on a white background
-is a dealbreaker. I'd want to cut it even before presenting my findings. 
+is a deal breaker. I'd want to cut it even before presenting my findings. 
 Otherwise, this is a good starting point for a discussion about alternatives to 
-default colors 
+default colors. 
 
 Once you've selected your color palettes, if you need to import them into another 
 visualization tool, both `viridis` and `scico` make that straightforward.
