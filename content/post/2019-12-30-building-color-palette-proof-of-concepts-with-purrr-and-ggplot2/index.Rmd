@@ -8,13 +8,13 @@ tags:
   - dataviz
 description: ''
 ---
-Recently, I raised the idea at work of changing the color palettes we use for 
-our dashboards. I felt the default colors we were using suffered from not being 
+Recently, I raised the idea at work of using some new color palettes in our 
+visualizations. I felt the colors we were using suffered from not being 
 accessible to clients with color blindness and could benefit from being more
-distinctive. My boss was open to the idea, but (understandably) wanted me to put 
-together mockups of possible new palettes before we starting tinkering with our
-product. Fortunately, the tidyverse makes it fast to generate proof of concepts 
-for several palettes.
+distinctive. My boss was open to the idea, but (understandably) didn't want
+me to just start tinkering with our products. I needed to put together mockups 
+of possible new palettes first. Fortunately, the tidyverse makes it fast to 
+generate proof of concepts for several color options.
 
 # Baseline plots
 We want plots we can use to show off how different color palettes handle 
