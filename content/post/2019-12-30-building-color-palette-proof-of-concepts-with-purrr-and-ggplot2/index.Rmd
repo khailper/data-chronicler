@@ -79,16 +79,17 @@ palette, so a vector of names is enough.
 # Creating the Proofs of Concept
 Since we're repeating the same core process (building a pair of plots) with 
 minor tweaks (using a different color palette), we should write a function
-rather that we can re-run with a new parameter for each palette. Adding a 
+that we can re-run with a new parameter for each palette. Adding a 
 palette from `viridis` is different enough from adding one from `scico` that 
-we'll actually want two, one for each. However, both have the same core steps:
+we'll actually want two functions, one for each package. However, both have the 
+same core steps:
 1. Add the palette to the baseline plots.
 2. Combine the two plots into one with [`patchwork`](https://patchwork.data-imaginist.com/index.html) and add the 
 name of the palette as a title.
 3. Print out the new plot for review.
-4. (Optional) Save the plot for later/emailing to your boss. I'm assuming 
-that you're using a [project-oriented workflow](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/) to 
-managing your plot files.
+4. (Optional) Save the plot for later. I'm assuming that you're using a 
+[project-oriented workflow](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/) 
+to manage your plot files.
 ```{r build_vir_poc}
 build_vir_poc <- function(vir_pal_name, vir_pal_code){
 
