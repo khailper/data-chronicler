@@ -69,10 +69,12 @@ scico_palettes <- c("devon", "lajolla", "lapaz")
 ```
 
 We're using a pair of vectors for `viridis` but not for `scico` 
-because `ggplot2` using letter codes to identify viridis palettes. However, we 
-want to keep the name so that it can be used in plot titles and file names.
-`scico` just uses the name of the palette, so a vector of palette names is 
-enough.
+because `ggplot2` uses letter codes to identify viridis palettes (e.g. `"C"` for 
+`plasma`). However, we want to also have the palette name so that it can be 
+used in plot titles and file names. If your manager says, "I really liked 
+palette "B"; Let's use that one",  you don't want to be stuck scrambling to 
+remember if it was "magma" or "inferno". `scico` just uses the name of the 
+palette, so a vector of names is enough.
 
 # Creating the Proofs of Concept
 Since we're repeating the same core process (building a pair of plots) with 
