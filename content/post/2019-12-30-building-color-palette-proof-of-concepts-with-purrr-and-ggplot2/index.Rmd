@@ -88,11 +88,10 @@ name of the palette as a title.
 [project-oriented workflow](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/) 
 to manage your plot files.
 ```{r build_vir_poc}
-build_vir_poc <- function(vir_pal_name, vir_pal_code){
+build_vir_poc <- function(vir_pal_name, vir_pal_code, save_plot = FALSE){
 
 # use the letter code part of the vector for the scale function
-vir_bar <- bar_chart + scale_fill_viridis_d(option = vir_pal_code, 
-                                            save_plot = FALSE)
+vir_bar <- bar_chart + scale_fill_viridis_d(option = vir_pal_code)
 
 vir_scatter <- scatter_plot + scale_color_viridis_c(option = vir_pal_code)
 
@@ -110,10 +109,9 @@ if (save_plot == TRUE){
 ```
 
 ```{r build_scico_poc}
-build_scico_poc <- function(scico_pal){
+build_scico_poc <- function(scico_pal, save_plot = FALSE){
 
-scico_bar <- bar_chart + scale_fill_scico_d(palette = scico_pal,
-                                            save_plot = FALSE)
+scico_bar <- bar_chart + scale_fill_scico_d(palette = scico_pal)
 
 scico_scatter <- scatter_plot + scale_color_scico(palette = scico_pal)
 scico_patch <-  scico_bar/ scico_scatter + 
