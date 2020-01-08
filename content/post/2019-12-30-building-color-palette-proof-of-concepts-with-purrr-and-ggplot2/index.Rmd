@@ -18,7 +18,7 @@ We want plots we can use to show off how different color palettes handle both
 continuous and discrete data. A bar chart and a scatter plot seem like 
 good ways to do that.
 
-```{r setup, echo = FALSE}
+```{r setup, message = FALSE}
 library(tidyverse)
 library(scico)
 library(patchwork) # to put both plots in the same image
@@ -156,7 +156,7 @@ straightforward.
 ```{r export_rgb}
 # print 20 rgb codes for each palette
 # plasma
-viridis(20, option = "C")
+viridisLite::viridis(20, option = "C")
 
 # lapaz
 scico(20, palette = "lapaz")

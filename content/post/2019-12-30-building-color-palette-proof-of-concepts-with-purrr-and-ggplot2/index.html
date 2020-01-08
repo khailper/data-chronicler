@@ -20,14 +20,11 @@ generate proofs of concept for several color options.</p>
 <p>We want plots we can use to show off how different color palettes handle both
 continuous and discrete data. A bar chart and a scatter plot seem like
 good ways to do that.</p>
-<pre><code>## -- Attaching packages ---------------------------------------------------------- tidyverse 1.3.0 --</code></pre>
-<pre><code>## &lt;U+2713&gt; ggplot2 3.2.1     &lt;U+2713&gt; purrr   0.3.3
-## &lt;U+2713&gt; tibble  2.1.3     &lt;U+2713&gt; dplyr   0.8.3
-## &lt;U+2713&gt; tidyr   1.0.0     &lt;U+2713&gt; stringr 1.4.0
-## &lt;U+2713&gt; readr   1.3.1     &lt;U+2713&gt; forcats 0.4.0</code></pre>
-<pre><code>## -- Conflicts ------------------------------------------------------------- tidyverse_conflicts() --
-## x dplyr::filter() masks stats::filter()
-## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(tidyverse)
+library(scico)
+library(patchwork) # to put both plots in the same image
+
+theme_set(theme_minimal())</code></pre>
 <pre class="r"><code>bar_chart &lt;- ggplot(diamonds, aes(cut, fill = cut)) + 
   geom_bar() + 
   coord_flip() +
@@ -145,18 +142,15 @@ alternatives to default colors.</p>
 another visualization tool, both <code>viridis</code> and <code>scico</code> make that
 straightforward.</p>
 <pre class="r"><code># print 20 rgb codes for each palette
-paste(&quot;plasma:&quot;, viridisLite::viridis(20, option = &quot;C&quot;))</code></pre>
-<pre><code>##  [1] &quot;plasma: #0D0887FF&quot; &quot;plasma: #2D0594FF&quot; &quot;plasma: #44039EFF&quot;
-##  [4] &quot;plasma: #5901A5FF&quot; &quot;plasma: #6F00A8FF&quot; &quot;plasma: #8305A7FF&quot;
-##  [7] &quot;plasma: #9512A1FF&quot; &quot;plasma: #A72197FF&quot; &quot;plasma: #B6308BFF&quot;
-## [10] &quot;plasma: #C5407EFF&quot; &quot;plasma: #D14E72FF&quot; &quot;plasma: #DD5E66FF&quot;
-## [13] &quot;plasma: #E76E5BFF&quot; &quot;plasma: #EF7F4FFF&quot; &quot;plasma: #F79044FF&quot;
-## [16] &quot;plasma: #FBA238FF&quot; &quot;plasma: #FEB72DFF&quot; &quot;plasma: #FDCB26FF&quot;
-## [19] &quot;plasma: #F7E225FF&quot; &quot;plasma: #F0F921FF&quot;</code></pre>
-<pre class="r"><code>paste(&quot;lapaz:&quot;, scico(20, palette = &quot;lapaz&quot;))</code></pre>
-<pre><code>##  [1] &quot;lapaz: #190C65&quot; &quot;lapaz: #1D1F71&quot; &quot;lapaz: #20307D&quot; &quot;lapaz: #244089&quot;
-##  [5] &quot;lapaz: #284F92&quot; &quot;lapaz: #2D5F9B&quot; &quot;lapaz: #336DA0&quot; &quot;lapaz: #3C7AA4&quot;
-##  [9] &quot;lapaz: #4A88A6&quot; &quot;lapaz: #5B93A6&quot; &quot;lapaz: #709CA2&quot; &quot;lapaz: #85A29B&quot;
-## [13] &quot;lapaz: #99A593&quot; &quot;lapaz: #ACA68C&quot; &quot;lapaz: #C0A989&quot; &quot;lapaz: #D9B490&quot;
-## [17] &quot;lapaz: #F0C5A6&quot; &quot;lapaz: #FCD6C1&quot; &quot;lapaz: #FFE4DA&quot; &quot;lapaz: #FFF2F2&quot;</code></pre>
+# plasma
+viridisLite::viridis(20, option = &quot;C&quot;)</code></pre>
+<pre><code>##  [1] &quot;#0D0887FF&quot; &quot;#2D0594FF&quot; &quot;#44039EFF&quot; &quot;#5901A5FF&quot; &quot;#6F00A8FF&quot; &quot;#8305A7FF&quot;
+##  [7] &quot;#9512A1FF&quot; &quot;#A72197FF&quot; &quot;#B6308BFF&quot; &quot;#C5407EFF&quot; &quot;#D14E72FF&quot; &quot;#DD5E66FF&quot;
+## [13] &quot;#E76E5BFF&quot; &quot;#EF7F4FFF&quot; &quot;#F79044FF&quot; &quot;#FBA238FF&quot; &quot;#FEB72DFF&quot; &quot;#FDCB26FF&quot;
+## [19] &quot;#F7E225FF&quot; &quot;#F0F921FF&quot;</code></pre>
+<pre class="r"><code># lapaz
+scico(20, palette = &quot;lapaz&quot;)</code></pre>
+<pre><code>##  [1] &quot;#190C65&quot; &quot;#1D1F71&quot; &quot;#20307D&quot; &quot;#244089&quot; &quot;#284F92&quot; &quot;#2D5F9B&quot; &quot;#336DA0&quot;
+##  [8] &quot;#3C7AA4&quot; &quot;#4A88A6&quot; &quot;#5B93A6&quot; &quot;#709CA2&quot; &quot;#85A29B&quot; &quot;#99A593&quot; &quot;#ACA68C&quot;
+## [15] &quot;#C0A989&quot; &quot;#D9B490&quot; &quot;#F0C5A6&quot; &quot;#FCD6C1&quot; &quot;#FFE4DA&quot; &quot;#FFF2F2&quot;</code></pre>
 </div>
