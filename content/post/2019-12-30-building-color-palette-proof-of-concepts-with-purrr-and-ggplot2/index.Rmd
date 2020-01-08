@@ -17,7 +17,7 @@ of possible new palettes first. Fortunately, the tidyverse makes it fast to
 generate proof of concepts for several color options.
 
 # Baseline plots
-We want plots we can use to show off how different color palettes handle 
+We want plots we can use to show off how different color palettes handle both
 continuous and discrete data. A bar chart and a scatter plot seem like 
 good ways to do that.
 
@@ -56,18 +56,19 @@ We're going to use a few palettes from
 (now part of `ggplot2`) and 
 [`scico`](https://www.data-imaginist.com/2018/scico-and-the-colour-conundrum/). 
 Both packages prioritize palettes that are friendly to users with 
-colorblindness and read well.Since this is for presenting to a higher-up, I've 
-already narrowed it down to two or three palettes from each package that I 
-think might be appealing and are fairly different from each other.
+colorblindness and read well. Since this is for presenting to a higher-up, I've 
+already narrowed it down to two or three palettes from each package. I pick ones
+that I thought might be appealing and are fairly different from each other.
 
 ```{r palettes}
 viridis_palettes <- c("plasma", "viridis")
+# codes for plasma and viridis
 viridis_pal_codes <- c("C", "D")
 
 scico_palettes <- c("devon", "lajolla", "lapaz")
 ```
 
-We're using a pair of vectors for `viridis`_pals` but not for `scico_pals` 
+We're using a pair of vectors for `viridis` but not for `scico` 
 because `ggplot2` using letter codes to identify viridis palettes. However, we 
 want to keep the name so that it can be used in plot titles and file names.
 `scico` just uses the name of the palette, so a vector of palette names is 
