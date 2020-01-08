@@ -134,13 +134,15 @@ if (save_plot = TRUE){
 
 # Scale up with `purrr::walk()`
 To generate all those plots, we need to iterate the functions over our palettes.
-We could do this with a for loop, but we can simplify things with 
+We could do this with a `for loop`, but we can simplify things with 
 `purrr::walk()`. `walk` is  version of
-(`purrr::map()`)[https://jennybc.github.io/purrr-tutorial/ls01_map-name-position-shortcuts.html] that is designed for functions where we care about the side effects (e.g. 
+(`purrr::map()`)[https://jennybc.github.io/purrr-tutorial/ls01_map-name-position-shortcuts.html] 
+that is designed for functions where we care about the side effects (e.g. 
 creating a plot, writing to a file) instead of a traditional return value (e.g. 
 the square root of an input). For `build_vir_poc`, we use a variant of `walk()`: 
-`walk2()`. `walk2` lets you iterate over a pair of vectors for when you have two 
-parameters that you want to change.
+`walk2()`. `walk2` iterates over a pair of vectors for when you have two 
+parameters that you want to change. This is similar to a loop `for 
+(i in 1:n){...}` where you use `i` multiple times inside of `{...}`.
 ```{r create_plots, warning = FALSE}
 walk2(viridis_palettes, viridis_pal_codes, build_vir_poc)
 walk(scico_palettes, build_scico_poc)
