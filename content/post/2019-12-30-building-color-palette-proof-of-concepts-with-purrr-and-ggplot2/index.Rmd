@@ -102,7 +102,7 @@ vir_patch <-  vir_bar/ vir_scatter +
 
 print(vir_patch)
 
-if (save_plot = TRUE){
+if (save_plot == TRUE){
   ggsave(filename = here::here(paste0("figs/", vir_pal_name, ".jpg")),
        plot = vir_patch)
 }
@@ -121,7 +121,7 @@ scico_patch <-  scico_bar/ scico_scatter +
 
 print(scico_patch)
 
-if (save_plot = TRUE){
+if (save_plot == TRUE){
   ggsave(filename = here::here(paste0("figs/", scico_pal, ".jpg")),
        plot = scico_patch)
 }
