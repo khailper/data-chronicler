@@ -1,5 +1,5 @@
 ---
-title: Building Color Palette Proof of Concepts with purrr and ggplot2
+title: Building Color Palette Proofs of Concept with purrr and ggplot2
 author: Karl Hailperin
 date: '2020-01-08'
 tags:
@@ -11,7 +11,7 @@ accessible to clients with color blindness and could benefit from being more
 distinctive. My boss was open to the idea, but (understandably) didn't want
 me to just start tinkering with our products. I needed to put together mockups 
 of possible new palettes first. Fortunately, the tidyverse makes it fast to 
-generate proof of concepts for several color options.
+generate proofs of concept for several color options.
 
 # Baseline plots
 We want plots we can use to show off how different color palettes handle both
@@ -155,10 +155,10 @@ straightforward.
 
 ```{r export_rgb}
 # print 20 rgb codes for each palette
-print("plasma:")
-viridisLite::viridis(20, option = "C")
+# plasma
+viridis(20, option = "C")
 
-print("\nlapaz")
+# lapaz
 scico(20, palette = "lapaz")
 
 ```

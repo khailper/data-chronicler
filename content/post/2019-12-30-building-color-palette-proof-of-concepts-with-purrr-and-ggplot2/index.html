@@ -1,0 +1,162 @@
+---
+title: Building Color Palette Proofs of Concept with purrr and ggplot2
+author: Karl Hailperin
+date: '2020-01-08'
+tags:
+  - dataviz
+---
+
+
+
+<p>Recently, I raised the idea at work of using some new color palettes in our
+visualizations. I felt the colors we were using suffered from not being
+accessible to clients with color blindness and could benefit from being more
+distinctive. My boss was open to the idea, but (understandably) didn’t want
+me to just start tinkering with our products. I needed to put together mockups
+of possible new palettes first. Fortunately, the tidyverse makes it fast to
+generate proofs of concept for several color options.</p>
+<div id="baseline-plots" class="section level1">
+<h1>Baseline plots</h1>
+<p>We want plots we can use to show off how different color palettes handle both
+continuous and discrete data. A bar chart and a scatter plot seem like
+good ways to do that.</p>
+<pre><code>## -- Attaching packages ---------------------------------------------------------- tidyverse 1.3.0 --</code></pre>
+<pre><code>## &lt;U+2713&gt; ggplot2 3.2.1     &lt;U+2713&gt; purrr   0.3.3
+## &lt;U+2713&gt; tibble  2.1.3     &lt;U+2713&gt; dplyr   0.8.3
+## &lt;U+2713&gt; tidyr   1.0.0     &lt;U+2713&gt; stringr 1.4.0
+## &lt;U+2713&gt; readr   1.3.1     &lt;U+2713&gt; forcats 0.4.0</code></pre>
+<pre><code>## -- Conflicts ------------------------------------------------------------- tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>bar_chart &lt;- ggplot(diamonds, aes(cut, fill = cut)) + 
+  geom_bar() + 
+  coord_flip() +
+  # fill guide would just duplicate x-axis label and take up space
+  guides(fill = FALSE) +
+  labs(x = &quot;Cut&quot;, y = &quot;# of diamonds&quot;)
+
+bar_chart</code></pre>
+<p><img src="/post/2019-12-30-building-color-palette-proof-of-concepts-with-purrr-and-ggplot2/index_files/figure-html/bar_chart-1.png" width="672" /></p>
+<pre class="r"><code>scatter_plot &lt;- ggplot(txhousing, aes(listings, sales, color = median)) +
+  geom_point() +
+  labs(x = &quot;Monthly listings in county&quot;, 
+       y = &quot;# of sales&quot;,
+       color = &quot;Median sale price&quot;)
+
+scatter_plot</code></pre>
+<p><img src="/post/2019-12-30-building-color-palette-proof-of-concepts-with-purrr-and-ggplot2/index_files/figure-html/scatter_plot-1.png" width="672" /></p>
+</div>
+<div id="palettes" class="section level1">
+<h1>Palettes</h1>
+<p>We’re going to use a few palettes from
+<a href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html"><code>viridis</code></a>
+(now part of <code>ggplot2</code>) and
+<a href="https://www.data-imaginist.com/2018/scico-and-the-colour-conundrum/"><code>scico</code></a>.
+Both packages prioritize palettes that are friendly to users with
+colorblindness and read well. Since this is for presenting to a higher-up, I’ve
+already narrowed it down to two or three palettes from each package. I pick ones
+that I thought might be appealing and are fairly different from each other.</p>
+<pre class="r"><code>viridis_palettes &lt;- c(&quot;plasma&quot;, &quot;viridis&quot;)
+# codes for plasma and viridis
+viridis_pal_codes &lt;- c(&quot;C&quot;, &quot;D&quot;)
+
+scico_palettes &lt;- c(&quot;devon&quot;, &quot;lajolla&quot;, &quot;lapaz&quot;)</code></pre>
+<p>We’re using a pair of vectors for <code>viridis</code> but not for <code>scico</code>
+because <code>ggplot2</code> uses letter codes to identify viridis palettes (e.g. <code>"C"</code> for
+<code>plasma</code>). However, we want to also have the palette name so that it can be
+used in plot titles and file names. If your manager says, “I really liked
+palette”B“; Let’s use that one”, you don’t want to be stuck scrambling to
+remember if it was “magma” or “inferno”. <code>scico</code> just uses the name of the
+palette, so a vector of names is enough.</p>
+</div>
+<div id="creating-the-proofs-of-concept" class="section level1">
+<h1>Creating the Proofs of Concept</h1>
+<p>Since we’re repeating the same core process (building a pair of plots) with
+minor tweaks (using a different color palette), we should write a function
+that we can re-run with a new parameter for each palette. Adding a
+palette from <code>viridis</code> is different enough from adding one from <code>scico</code> that
+we’ll actually want two functions, one for each package. However, both have the
+same core steps:
+1. Add the palette to the baseline plots.
+2. Combine the two plots into one with <a href="https://patchwork.data-imaginist.com/index.html"><code>patchwork</code></a> and add the
+name of the palette as a title.
+3. Print out the new plot for review.
+4. (Optional) Save the plot for later. I’m assuming that you’re using a
+<a href="https://www.tidyverse.org/blog/2017/12/workflow-vs-script/">project-oriented workflow</a>
+to manage your plot files.</p>
+<pre class="r"><code>build_vir_poc &lt;- function(vir_pal_name, vir_pal_code, save_plot = FALSE){
+
+# use the letter code part of the vector for the scale function
+vir_bar &lt;- bar_chart + scale_fill_viridis_d(option = vir_pal_code)
+
+vir_scatter &lt;- scatter_plot + scale_color_viridis_c(option = vir_pal_code)
+
+# use the name part for the title
+vir_patch &lt;-  vir_bar/ vir_scatter + 
+  plot_annotation(title = vir_pal_name)
+
+print(vir_patch)
+
+if (save_plot == TRUE){
+  ggsave(filename = here::here(paste0(&quot;figs/&quot;, vir_pal_name, &quot;.jpg&quot;)),
+       plot = vir_patch)
+}
+}</code></pre>
+<pre class="r"><code>build_scico_poc &lt;- function(scico_pal, save_plot = FALSE){
+
+scico_bar &lt;- bar_chart + scale_fill_scico_d(palette = scico_pal)
+
+scico_scatter &lt;- scatter_plot + scale_color_scico(palette = scico_pal)
+scico_patch &lt;-  scico_bar/ scico_scatter + 
+  plot_annotation(title = scico_pal)
+
+print(scico_patch)
+
+if (save_plot == TRUE){
+  ggsave(filename = here::here(paste0(&quot;figs/&quot;, scico_pal, &quot;.jpg&quot;)),
+       plot = scico_patch)
+}
+
+}</code></pre>
+</div>
+<div id="scale-up-with-purrrwalk" class="section level1">
+<h1>Scale up with <code>purrr::walk()</code></h1>
+<p>To generate all those plots, we need to iterate the functions over our palettes.
+We could do this with a <code>for loop</code>, but we can simplify things with
+<code>purrr::walk()</code>. <code>walk</code> is version of
+(<code>purrr::map()</code>)[<a href="https://jennybc.github.io/purrr-tutorial/ls01_map-name-position-shortcuts.html" class="uri">https://jennybc.github.io/purrr-tutorial/ls01_map-name-position-shortcuts.html</a>]
+that is designed for functions where we care about the side effects (e.g. 
+creating a plot, writing to a file) instead of a traditional return value (e.g. 
+the square root of an input). For <code>build_vir_poc</code>, we use a variant of <code>walk()</code>:
+<code>walk2()</code>. <code>walk2</code> iterates over a pair of vectors for when you have two
+parameters that you want to change. This is similar to a loop <code>for  (i in 1:n){...}</code> where you use <code>i</code> multiple times inside of <code>{...}</code>.</p>
+<pre class="r"><code>walk2(viridis_palettes, viridis_pal_codes, build_vir_poc)</code></pre>
+<p><img src="/post/2019-12-30-building-color-palette-proof-of-concepts-with-purrr-and-ggplot2/index_files/figure-html/create_plots-1.png" width="672" /><img src="/post/2019-12-30-building-color-palette-proof-of-concepts-with-purrr-and-ggplot2/index_files/figure-html/create_plots-2.png" width="672" /></p>
+<pre class="r"><code>walk(scico_palettes, build_scico_poc)</code></pre>
+<p><img src="/post/2019-12-30-building-color-palette-proof-of-concepts-with-purrr-and-ggplot2/index_files/figure-html/create_plots-3.png" width="672" /><img src="/post/2019-12-30-building-color-palette-proof-of-concepts-with-purrr-and-ggplot2/index_files/figure-html/create_plots-4.png" width="672" /><img src="/post/2019-12-30-building-color-palette-proof-of-concepts-with-purrr-and-ggplot2/index_files/figure-html/create_plots-5.png" width="672" /></p>
+</div>
+<div id="conclusion" class="section level1">
+<h1>Conclusion</h1>
+<p>While I like the <code>devon</code> colors, the fact it leads to a white bar on a white
+background is a deal breaker. I’d want to cut it even before presenting my
+findings. Otherwise, this is a good starting point for talking about
+alternatives to default colors.</p>
+<p>Once you’ve selected your color palettes, if you need to import them into
+another visualization tool, both <code>viridis</code> and <code>scico</code> make that
+straightforward.</p>
+<pre class="r"><code># print 20 rgb codes for each palette
+paste(&quot;plasma:&quot;, viridisLite::viridis(20, option = &quot;C&quot;))</code></pre>
+<pre><code>##  [1] &quot;plasma: #0D0887FF&quot; &quot;plasma: #2D0594FF&quot; &quot;plasma: #44039EFF&quot;
+##  [4] &quot;plasma: #5901A5FF&quot; &quot;plasma: #6F00A8FF&quot; &quot;plasma: #8305A7FF&quot;
+##  [7] &quot;plasma: #9512A1FF&quot; &quot;plasma: #A72197FF&quot; &quot;plasma: #B6308BFF&quot;
+## [10] &quot;plasma: #C5407EFF&quot; &quot;plasma: #D14E72FF&quot; &quot;plasma: #DD5E66FF&quot;
+## [13] &quot;plasma: #E76E5BFF&quot; &quot;plasma: #EF7F4FFF&quot; &quot;plasma: #F79044FF&quot;
+## [16] &quot;plasma: #FBA238FF&quot; &quot;plasma: #FEB72DFF&quot; &quot;plasma: #FDCB26FF&quot;
+## [19] &quot;plasma: #F7E225FF&quot; &quot;plasma: #F0F921FF&quot;</code></pre>
+<pre class="r"><code>paste(&quot;lapaz:&quot;, scico(20, palette = &quot;lapaz&quot;))</code></pre>
+<pre><code>##  [1] &quot;lapaz: #190C65&quot; &quot;lapaz: #1D1F71&quot; &quot;lapaz: #20307D&quot; &quot;lapaz: #244089&quot;
+##  [5] &quot;lapaz: #284F92&quot; &quot;lapaz: #2D5F9B&quot; &quot;lapaz: #336DA0&quot; &quot;lapaz: #3C7AA4&quot;
+##  [9] &quot;lapaz: #4A88A6&quot; &quot;lapaz: #5B93A6&quot; &quot;lapaz: #709CA2&quot; &quot;lapaz: #85A29B&quot;
+## [13] &quot;lapaz: #99A593&quot; &quot;lapaz: #ACA68C&quot; &quot;lapaz: #C0A989&quot; &quot;lapaz: #D9B490&quot;
+## [17] &quot;lapaz: #F0C5A6&quot; &quot;lapaz: #FCD6C1&quot; &quot;lapaz: #FFE4DA&quot; &quot;lapaz: #FFF2F2&quot;</code></pre>
+</div>
