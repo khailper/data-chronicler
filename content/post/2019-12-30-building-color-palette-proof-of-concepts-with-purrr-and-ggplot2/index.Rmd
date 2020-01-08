@@ -1,12 +1,9 @@
 ---
 title: Building Color Palette Proof of Concepts with purrr and ggplot2
 author: Karl Hailperin
-date: '2019-12-30'
-slug: []
-categories: []
+date: '2020-01-08'
 tags:
   - dataviz
-description: ''
 ---
 Recently, I raised the idea at work of using some new color palettes in our 
 visualizations. I felt the colors we were using suffered from not being 
@@ -149,17 +146,21 @@ walk(scico_palettes, build_scico_poc)
 ```
 
 # Conclusion
-While I like the `devon` colors, the fact it leads to a white bar on a white background
-is a deal breaker. I'd want to cut it even before presenting my findings. 
-Otherwise, this is a good starting point for a discussion about alternatives to 
-default colors. 
+While I like the `devon` colors, the fact it leads to a white bar on a white 
+background is a deal breaker. I'd want to cut it even before presenting my 
+findings. Otherwise, this is a good starting point for talking about 
+alternatives to default colors. 
 
-Once you've selected your color palettes, if you need to import them into another 
-visualization tool, both `viridis` and `scico` make that straightforward.
+Once you've selected your color palettes, if you need to import them into 
+another visualization tool, both `viridis` and `scico` make that 
+straightforward.
 
 ```{r export_rgb}
 # print 20 rgb codes for each palette
-viridisLite::viridis(20, option = "C") #plasma
+print("plasma:")
+viridisLite::viridis(20, option = "C")
+
+print("\nlapaz")
 scico(20, palette = "lapaz")
 
 ```
