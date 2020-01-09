@@ -8,13 +8,15 @@ tags:
 
 
 
-<p>Recently, I raised the idea at work of using some new color palettes in our
-visualizations. I felt the colors we were using suffered from not being
-accessible to clients with color blindness and could benefit from being more
-distinctive. My boss was open to the idea, but (understandably) didn’t want
-me to just start tinkering with our products. I needed to put together mockups
-of possible new palettes first. Fortunately, the tidyverse makes it fast to
-generate proofs of concept for several color options.</p>
+<p>One of the best ways to make your data visualization work stand out is by
+breaking away from your tool’s default color scheme. This also has the benefit
+of making your work more accessible to users with color blindness, as many default
+palettes aren’t designed for users with visual issues. Your boss may be open to
+the idea, but (understandably) doesn’t want you to just start tinkering with
+your products. The solution is to make mockups of possible new palettes first.
+Then, you and your manager can decide if any of them are better than your
+current colors. Fortunately, the tidyverse makes it fast to generate proofs of
+concept for several color options.</p>
 <div id="baseline-plots" class="section level1">
 <h1>Baseline plots</h1>
 <p>We want plots we can use to show off how different color palettes handle both
@@ -52,7 +54,9 @@ scatter_plot</code></pre>
 Both packages prioritize palettes that are friendly to users with
 colorblindness and read well. Since this is for presenting to a higher-up, I’ve
 already narrowed it down to two or three palettes from each package. I pick ones
-that I thought might be appealing and are fairly different from each other.</p>
+that I thought might be appealing and are fairly different from each other. I
+encourage you to check out both packages to see if any of the other palettes
+seem more promising for your needs.</p>
 <pre class="r"><code>viridis_palettes &lt;- c(&quot;plasma&quot;, &quot;viridis&quot;)
 # codes for plasma and viridis
 viridis_pal_codes &lt;- c(&quot;C&quot;, &quot;D&quot;)
@@ -135,9 +139,8 @@ parameters that you want to change. This is similar to a loop <code>for  (i in 1
 <div id="conclusion" class="section level1">
 <h1>Conclusion</h1>
 <p>While I like the <code>devon</code> colors, the fact it leads to a white bar on a white
-background is a deal breaker. I’d want to cut it even before presenting my
-findings. Otherwise, this is a good starting point for talking about
-alternatives to default colors.</p>
+background is a deal breaker. It’s an easy first cut. Otherwise, this is a good
+starting point for thinking about alternatives to default colors.</p>
 <p>Once you’ve selected your color palettes, if you need to import them into
 another visualization tool, both <code>viridis</code> and <code>scico</code> make that
 straightforward.</p>

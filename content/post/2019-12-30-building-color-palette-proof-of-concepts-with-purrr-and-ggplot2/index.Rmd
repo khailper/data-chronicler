@@ -5,13 +5,15 @@ date: '2020-01-08'
 tags:
   - dataviz
 ---
-Recently, I raised the idea at work of using some new color palettes in our 
-visualizations. I felt the colors we were using suffered from not being 
-accessible to clients with color blindness and could benefit from being more
-distinctive. My boss was open to the idea, but (understandably) didn't want
-me to just start tinkering with our products. I needed to put together mockups 
-of possible new palettes first. Fortunately, the tidyverse makes it fast to 
-generate proofs of concept for several color options.
+One of the best ways to make your data visualization work stand out is by 
+breaking away from your tool's default color scheme. This also has the benefit 
+of making your work more accessible to users with color blindness, as many default
+palettes aren't designed for users with visual issues. Your boss may be open to 
+the idea, but (understandably) doesn't want you to just start tinkering with 
+your products. The solution is to make mockups of possible new palettes first. 
+Then, you and your manager can decide if any of them are better than your 
+current colors. Fortunately, the tidyverse makes it fast to generate proofs of 
+concept for several color options.
 
 # Baseline plots
 We want plots we can use to show off how different color palettes handle both
@@ -55,7 +57,9 @@ We're going to use a few palettes from
 Both packages prioritize palettes that are friendly to users with 
 colorblindness and read well. Since this is for presenting to a higher-up, I've 
 already narrowed it down to two or three palettes from each package. I pick ones
-that I thought might be appealing and are fairly different from each other.
+that I thought might be appealing and are fairly different from each other. I 
+encourage you to check out both packages to see if any of the other palettes 
+seem more promising for your needs.
 
 ```{r palettes}
 viridis_palettes <- c("plasma", "viridis")
@@ -145,9 +149,8 @@ walk(scico_palettes, build_scico_poc)
 
 # Conclusion
 While I like the `devon` colors, the fact it leads to a white bar on a white 
-background is a deal breaker. I'd want to cut it even before presenting my 
-findings. Otherwise, this is a good starting point for talking about 
-alternatives to default colors. 
+background is a deal breaker. It's an easy first cut. Otherwise, this is a good 
+starting point for thinking about alternatives to default colors. 
 
 Once you've selected your color palettes, if you need to import them into 
 another visualization tool, both `viridis` and `scico` make that 
