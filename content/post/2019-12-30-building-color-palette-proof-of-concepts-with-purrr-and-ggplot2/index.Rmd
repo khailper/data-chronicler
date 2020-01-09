@@ -56,7 +56,7 @@ We're going to use a few palettes from
 [`scico`](https://www.data-imaginist.com/2018/scico-and-the-colour-conundrum/). 
 Both packages prioritize palettes that are friendly to users with 
 colorblindness and read well. Since this is for presenting to a higher-up, I've 
-already narrowed it down to two or three palettes from each package. I pick ones
+already narrowed it down to two or three palettes from each package. I picked ones
 that I thought might be appealing and are fairly different from each other. I 
 encourage you to check out both packages to see if any of the other palettes 
 seem more promising for your needs.
