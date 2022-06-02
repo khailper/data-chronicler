@@ -1,6 +1,6 @@
 ---
 title: Building Color Palette Proofs of Concept with purrr and ggplot2
-author: Karl Hailperin
+author: Kathleen Hailperin
 date: '2020-01-08'
 tags:
   - dataviz

@@ -1,6 +1,6 @@
 ---
 title: 'Beyond Plot Labels: Hacking gganimate''s Frame Variables'
-author: Karl Hailperin
+author: Kathleen Hailperin
 date: '2019-07-24'
 tags:
   - dataviz

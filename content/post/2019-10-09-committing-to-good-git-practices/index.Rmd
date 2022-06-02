@@ -1,6 +1,6 @@
 ---
 title: Committing to Good Git Practices
-author: Karl Hailperin
+author: Kathleen Hailperin
 date: '2019-10-09'
 tags:
   - git

@@ -17,7 +17,7 @@ googleAnalytics = "XXX"
     useSessionStorage = false
 
 [Author]
-    name = "Karl Hailperin"
+    name = "Kathleen Hailperin"
     # profile = "https://google.com/+XXX"
 
 [Taxonomies]
@@ -26,10 +26,10 @@ googleAnalytics = "XXX"
 [Params]
     intro = true
     headline = "Data Chronicler"
-    description = "Karl Hailperin's blog"
+    description = "Kathleen Hailperin's blog"
     github = "https://github.com/khailper"
     # gitlab = "https://gitlab.com/XXX"
-    # linkedin = "https://linkedin.com/in/XXX/"
+    # linkedin = "https://linkedin.com/in/khailper/"
     # gplus = "https://google.com/+XXX"
     twitter = "https://twitter.com/khailper"
     # stackoverflow = "https://stackoverflow.com/users/XXX/YYY"
